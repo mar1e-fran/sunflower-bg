@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sunflower Background Demo</title>
+<script src="sunflower-bg.js" defer></script>
+<style>
+  :root { --bg:#000; --fg:#f2f2f2; --muted:#9a9a9a; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--fg); font-family:ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+
+  .hero { position:relative; min-height:100vh; min-height:100svh; display:flex; flex-direction:column; overflow:hidden; isolation:isolate; }
+  /* soft vignette so the heading always stays readable over the flowers */
+  .hero::after {
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,0,0,.85), rgba(0,0,0,0) 75%);
+  }
+  .hero > *:not(sunflower-bg) { position:relative; z-index:2; }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:24px clamp(16px, 4vw, 48px); font-size:14px; }
+  nav .logo { font-family:Menlo, monospace; letter-spacing:.2em; }
+  nav a { color:var(--muted); text-decoration:none; margin-left:24px; }
+  nav a:hover { color:var(--fg); }
+  @media (max-width: 480px) { nav a { margin-left:14px; } nav .logo { letter-spacing:.1em; } }
+
+  .content { flex:1; display:grid; place-content:center; text-align:center; padding:0 16px 10vh; }
+  .eyebrow { font-family:Menlo, monospace; font-size:12px; letter-spacing:.3em; color:var(--muted); margin:0 0 20px; }
+  h1 { font-size:clamp(40px, 7vw, 96px); line-height:1; letter-spacing:-.03em; margin:0; font-weight:600; }
+  .lede { max-width:46ch; margin:24px auto 0; color:var(--muted); font-size:clamp(16px, 1.6vw, 19px); line-height:1.5; }
+  .actions { margin-top:36px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  button, .btn { font:inherit; font-size:15px; padding:12px 22px; border-radius:999px; cursor:pointer; border:1px solid #fff; text-decoration:none; }
+  .primary { background:#fff; color:#000; }
+  .ghost { background:transparent; color:#fff; border-color:#555; }
+  .ghost:hover { border-color:#fff; }
+
+  .after { padding:96px clamp(16px, 4vw, 48px); max-width:900px; margin:0 auto; color:var(--muted); line-height:1.6; }
+  .after h2 { color:var(--fg); font-weight:600; }
+  pre { background:#111; color:#ddd; padding:16px; border-radius:8px; overflow-x:auto; font-size:13px; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <sunflower-bg></sunflower-bg>
+
+  <nav>
+    <span class="logo">SUNFLOWER</span>
+    <span><a href="#">Work</a><a href="#">About</a><a href="#">Contact</a></span>
+  </nav>
+
+  <div class="content">
+    <p class="eyebrow">IT IS A PRIVILEGE TO BLOOM</p>
+    <h1>Grow toward<br>the light.</h1>
+    <p class="lede">A landing page with a dot-matrix sunflower background. It's drawn live and changes every time you load the page.</p>
+    <div class="actions">
+      <a class="btn primary" href="#">Get started</a>
+      <button class="ghost" onclick="document.querySelector('sunflower-bg').reseed()">New sunflowers</button>
+    </div>
+  </div>
+</section>
+
+<section class="after">
+  <h2>Use it on your site</h2>
+  <pre>&lt;script src="sunflower-bg.js" defer&gt;&lt;/script&gt;
+
+&lt;section style="position:relative"&gt;
+  &lt;sunflower-bg color="#fff" pitch="6"&gt;&lt;/sunflower-bg&gt;
+  &lt;h1 style="position:relative"&gt;Your heading&lt;/h1&gt;
+&lt;/section&gt;</pre>
+</section>
+
+</body>
+</html>
